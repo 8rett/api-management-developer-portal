@@ -8,7 +8,7 @@ resource "azurerm_resource_group" "rg" {
 }
 
 resource "azurerm_api_management" "apim" {
-  name                = "myApiManagement"
+  name                = "apim-2guxyrz57b67j"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
 

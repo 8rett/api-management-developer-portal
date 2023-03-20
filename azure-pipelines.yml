@@ -17,3 +17,25 @@ steps:
     echo Add other tasks to build, test, and deploy your project.
     echo See https://aka.ms/yaml
   displayName: 'Run a multi-line script'
+
+- task: TerraformInstaller@1
+  inputs:
+    terraformVersion: 'latest'
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: '$(System.DefaultWorkingDirectory)\terraform'
+    backendServiceArm: 'Pay-As-You-Go(8108a794-bc72-4561-9922-8c497443200d)'
+    backendAzureRmResourceGroupName: 'terraform'
+    backendAzureRmStorageAccountName: 't3rraf0rm'
+    backendAzureRmContainerName: 'terraform'
+    backendAzureRmKey: '$(terraformStorageKey)'
+
+- task: TerraformTaskV4@4
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)\terraform'
+    environmentServiceNameAzureRM: 'Pay-As-You-Go(8108a794-bc72-4561-9922-8c497443200d)'

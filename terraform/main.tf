@@ -1,9 +1,5 @@
 provider "azurerm" {
-  features {
-    # required for Api Management
-    # source: https://www.terraform.io/docs/providers/azurerm/guides/migration-features.html#api-management
-    api_management_preview = true
-  }
+  features {}
 }
 
 resource "azurerm_resource_group" "rg" {

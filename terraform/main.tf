@@ -1,6 +1,5 @@
 provider "azurerm" {
-  version = "~> 2.0"
-  feature {
+  features {
     # required for Api Management
     # source: https://www.terraform.io/docs/providers/azurerm/guides/migration-features.html#api-management
     api_management_preview = true

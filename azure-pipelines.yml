@@ -41,6 +41,11 @@ steps:
 #    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
 #    environmentServiceNameAzureRM: 'Pay-As-You-Go(8108a794-bc72-4561-9922-8c497443200d)'
 
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: '$(System.DefaultWorkingDirectory)'
+
 - task: AzureCLI@2
   displayName: Export Content
   inputs:

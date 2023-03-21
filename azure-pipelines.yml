@@ -46,33 +46,40 @@ steps:
     command: 'install'
     workingDir: '$(System.DefaultWorkingDirectory)'
 
-- task: PowerShell@2
-  inputs:
-    targetType: 'inline'
-    script: 'Get-ChildItem -Path $(System.DefaultWorkingDirectory)/scripts.v3/'
+#- task: AzureCLI@2
+#  displayName: Export Content
+#  inputs:
+#    azureSubscription: 'Pay-As-You-Go(8108a794-bc72-4561-9922-8c497443200d)'
+#    scriptType: 'batch'
+#    scriptLocation: 'inlineScript'
+#    inlineScript: |
+#      node ./exportcontent ^
+#      --sourceSubscriptionId "8108a794-bc72-4561-9922-8c497443200d" ^
+#      --sourceResourceGroupName "api-management-rg" ^
+#      --sourceServiceName "apim-2guxyrz57b67j"
+#    workingDirectory: '$(System.DefaultWorkingDirectory)/scripts.v3/'
 
 - task: AzureCLI@2
-  displayName: Export Content
+  displayName: Import Content
   inputs:
     azureSubscription: 'Pay-As-You-Go(8108a794-bc72-4561-9922-8c497443200d)'
     scriptType: 'batch'
     scriptLocation: 'inlineScript'
     inlineScript: |
-      node ./exportcontent ^
-      --sourceSubscriptionId "8108a794-bc72-4561-9922-8c497443200d" ^
-      --sourceResourceGroupName "api-management-rg" ^
-      --sourceServiceName "apim-2guxyrz57b67j"
+      node ./importcontent ^
+      --destSubscriptionId "8108a794-bc72-4561-9922-8c497443200d" ^
+      --destResourceGroupName "api-management-rg" ^
+      --destServiceName "apim-2guxyrz57b67j"
     workingDirectory: '$(System.DefaultWorkingDirectory)/scripts.v3/'
 
+#- task: CopyFiles@2
+#  inputs:
+#    SourceFolder: '$(System.DefaultWorkingDirectory)/dist/snapshot'
+#    Contents: '**'
+#    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(System.DefaultWorkingDirectory)/dist/snapshot'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'DeveloperPortalSnapshot'
-    publishLocation: 'Container'
+#- task: PublishBuildArtifacts@1
+#  inputs:
+#    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+#    ArtifactName: 'DeveloperPortalSnapshot'
+#    publishLocation: 'Container'

@@ -9,7 +9,7 @@
  *    npm install
  * 
  * 3) Run this script with a valid combination of arguments:
- *    node ./migrate ^
+ *    node ./exportcontent ^
  *    --sourceSubscriptionId "< your subscription ID >" ^
  *    --sourceResourceGroupName "< your resource group name >" ^
  *    --sourceServiceName "< your service name >" ^

@@ -4,4 +4,4 @@
 node ./exportcontent ^
 --sourceSubscriptionId "< your subscription ID >" ^
 --sourceResourceGroupName "< your resource group name >" ^
---sourceServiceName "< your service name >" ^
+--sourceServiceName "< your service name >"

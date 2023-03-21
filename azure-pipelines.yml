@@ -3,21 +3,22 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+parameters:
+- name: terraformAction
+  displayName: Terraform Action
+  type: string
+  default: apply
+  values:
+  - apply
+  - destroy
+
 trigger:
-- master
+  none
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
-
 - task: TerraformInstaller@1
   inputs:
     terraformVersion: 'latest'
@@ -36,6 +37,7 @@ steps:
 - task: TerraformTaskV4@4
   inputs:
     provider: 'azurerm'
-    command: 'apply'
+    command: '${{ parameters.terraformAction }}'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform'
     environmentServiceNameAzureRM: 'Pay-As-You-Go(8108a794-bc72-4561-9922-8c497443200d)'
+

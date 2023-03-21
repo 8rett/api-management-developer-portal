@@ -63,3 +63,16 @@ steps:
       --sourceResourceGroupName "api-management-rg" ^
       --sourceServiceName "apim-2guxyrz57b67j"
     workingDirectory: '$(System.DefaultWorkingDirectory)/scripts.v3/'
+
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(System.DefaultWorkingDirectory)/dist/snapshot'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'DeveloperPortalSnapshot'
+    publishLocation: 'Container'
